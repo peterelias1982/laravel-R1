@@ -19,6 +19,7 @@
         <th>Title</th>
         <th>Content</th>
         <th>Published</th>
+        <th>Edit</th>
       </tr>
     </thead>
     <tbody>
@@ -26,7 +27,14 @@
       <tr>
         <td>{{ $car->carTitle }}</td>
         <td>{{ $car->description }}</td>
-        <td>{{ $car->published }}</td>
+        <td>
+            @if($car->published)
+                Yes
+            @else
+                No
+            @endif
+        </td>
+        <td><a href="editCar/{{ $car->id }}">Edit</a></td>
       </tr>
 @endforeach     
     </tbody>
