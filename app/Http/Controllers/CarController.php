@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Car;
+use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsRedirected;
 
 class CarController extends Controller
 {
@@ -80,9 +81,20 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
         Car::where('id', $id)->delete();
-        return 'deleted';
+        return redirect('cars');
+    }
+
+    public function trashed(){
+        $cars = Car::onlyTrashed()->get();
+        return view('trashed', compact('cars'));
+    }
+
+    public function restore(string $id): RedirectResponse
+    {
+        Car::where('id', $id)->restore();
+        return redirect('cars');
     }
 }

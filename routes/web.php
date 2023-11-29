@@ -77,6 +77,9 @@ Route::post('storeCar',[CarController::class, 'store'])->name('storeCar');
 
 Route::get('addCar',[CarController::class, 'create']);
 
+Route::get('trashed',[CarController::class, 'trashed']);
+Route::get('restoreCar/{id}',[CarController::class, 'restore']);
+
 Route::get('cars', [CarController::class, 'index']);
 
 Route::get('editCar/{id}', [CarController::class, 'edit']);
