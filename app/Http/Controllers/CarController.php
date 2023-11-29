@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsRedirected;
 
 class CarController extends Controller
 {
-    private $columns = ['carTitle', 'description'];
+    private $columns = ['carTitle', 'description','published'];
 
     /**
      * Display a listing of the resource.
@@ -33,16 +33,27 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        $cars = new Car;
-        $cars->carTitle = $request->title;
-        $cars->description = $request->description;
-        if(isset($request->published)){
-            $cars->published = true;
-        }else{
-            $cars->published = false;
-        }
-        $cars->save();
-        return "Car data added successfully";
+        // $cars = new Car;
+        // $cars->carTitle = $request->title;
+        // $cars->description = $request->description;
+        $request->validate([
+            'carTitle'=>'required|string|max:50',
+            'description'=>'required|string',
+        ]);
+
+        $data = $request->only($this->columns);
+        $data['published'] = isset($data['published'])? true : false;
+
+        Car::create($data);
+        return 'done';
+
+        // if(isset($request->published)){
+        //     $cars->published = true;
+        // }else{
+        //     $cars->published = false;
+        // }
+        // $cars->save();
+        
     }
 
     /**
