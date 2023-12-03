@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Car;
+use App\Traits\Common; 
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsRedirected;
 
 class CarController extends Controller
 {
+    use Common;
     private $columns = ['carTitle', 'description','published'];
 
     /**
@@ -36,15 +38,24 @@ class CarController extends Controller
         // $cars = new Car;
         // $cars->carTitle = $request->title;
         // $cars->description = $request->description;
-        $request->validate([
-            'carTitle'=>'required|string|max:50',
+        // $data = $request->only($this->columns);
+        // $data['published'] = isset($data['published'])? true : false;
+        $messages=[
+            'carTitle.required'=>'Title is required',
+            'description.required'=> 'should be text',
+        ];
+
+        $data = $request->validate([
+            'carTitle'=>'required|string',
             'description'=>'required|string',
-        ]);
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        ], $messages);
 
-        $data = $request->only($this->columns);
-        $data['published'] = isset($data['published'])? true : false;
-
+        $fileName = $this->uploadFile($request->image, 'assets/images');
+        $data['image']= $fileName;
+        $data['published'] = isset($request['published']);
         Car::create($data);
+
         return 'done';
 
         // if(isset($request->published)){

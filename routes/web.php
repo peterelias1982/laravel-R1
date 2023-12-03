@@ -73,6 +73,10 @@ Route::post('receive',[ExampleController::class, 'received'])->name('receive');
 
 Route::get('test1',[ExampleController::class, 'test1']);
 
+Route::get('showUpload',[ExampleController::class, 'showUpload']);
+
+Route::post('upload',[ExampleController::class, 'upload'])->name('upload');
+
 Route::post('storeCar',[CarController::class, 'store'])->name('storeCar');
 
 Route::get('addCar',[CarController::class, 'create']);

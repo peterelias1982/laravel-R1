@@ -13,6 +13,7 @@ class Car extends Model
     protected $fillable = [
     'carTitle',
     'description',
+    'image',
     'published',
     ];
 }

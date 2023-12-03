@@ -12,7 +12,7 @@
 
 <div class="container">
     <h2>Add Car</h2>
-    <form action="{{route('storeCar')}}" method="post">
+    <form action="{{route('storeCar')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="title">Title:</label>
@@ -31,6 +31,13 @@
             <label for="description">Description:</label>
             <textarea class="form-control" rows="5" id="description" name="description">{{ old('description') }}</textarea>
             @error('description')
+                {{ $message }}
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}">
+            @error('image')
                 {{ $message }}
             @enderror
         </div>
