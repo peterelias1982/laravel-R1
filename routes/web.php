@@ -68,6 +68,8 @@ Route::get('cv',function(){
 // })->name('receive');
 
 Route::get('login',[ExampleController::class, 'login']);
+Route::get('place',[ExampleController::class, 'place']);
+Route::get('blog',[ExampleController::class, 'blog']);
 
 Route::post('receive',[ExampleController::class, 'received'])->name('receive');
 
@@ -86,10 +88,9 @@ Route::get('restoreCar/{id}',[CarController::class, 'restore']);
 
 Route::get('cars', [CarController::class, 'index']);
 
-Route::get('editCar/{id}', [CarController::class, 'edit']);
-
 Route::get('deleteCar/{id}', [CarController::class, 'destroy']);
 
 Route::get('carDetails/{id}', [CarController::class, 'show'])->name('carDetails');
 
+Route::get('editCar/{id}', [CarController::class, 'edit']);
 Route::put('updateCar/{id}', [CarController::class, 'update'])->name('updateCar');

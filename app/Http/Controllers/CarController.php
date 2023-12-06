@@ -40,10 +40,7 @@ class CarController extends Controller
         // $cars->description = $request->description;
         // $data = $request->only($this->columns);
         // $data['published'] = isset($data['published'])? true : false;
-        $messages=[
-            'carTitle.required'=>'Title is required',
-            'description.required'=> 'should be text',
-        ];
+        $messages= $this->messages();
 
         $data = $request->validate([
             'carTitle'=>'required|string',
@@ -53,7 +50,7 @@ class CarController extends Controller
 
         $fileName = $this->uploadFile($request->image, 'assets/images');
         $data['image']= $fileName;
-        $data['published'] = isset($request['published']);
+        $data['published'] = isset($request->published);
         Car::create($data);
 
         return 'done';
@@ -95,8 +92,24 @@ class CarController extends Controller
         // $data['published'] = isset($data['published'])? true:false;
 
         // Car::where('id', $id)->update($data);
+        $messages= $this->messages();
 
-        Car::where('id', $id)->update($request->only($this->columns));
+        $data = $request->validate([
+            'carTitle'=>'required|string',
+            'description'=>'required|string',
+            'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+        ], $messages);
+       
+        $data['published'] = isset($request->published);
+
+        // update image if new file selected
+        if($request->hasFile('image')){
+            $fileName = $this->uploadFile($request->image, 'assets/images');
+            $data['image']= $fileName;
+        }
+
+        //return dd($data);
+        Car::where('id', $id)->update($data);
         return 'Updated';
     }
 
@@ -118,5 +131,12 @@ class CarController extends Controller
     {
         Car::where('id', $id)->restore();
         return redirect('cars');
+    }
+
+    public function messages(){
+        return [
+            'carTitle.required'=>'Title is required',
+            'description.required'=> 'should be text',
+        ];
     }
 }
