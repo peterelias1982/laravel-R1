@@ -70,6 +70,7 @@ Route::get('cv',function(){
 Route::get('login',[ExampleController::class, 'login']);
 Route::get('place',[ExampleController::class, 'place']);
 Route::get('blog',[ExampleController::class, 'blog']);
+Route::get('blog1',[ExampleController::class, 'blog1']);
 
 Route::post('receive',[ExampleController::class, 'received'])->name('receive');
 

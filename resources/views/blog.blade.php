@@ -1,21 +1,6 @@
-<!doctype html>
-<html class="no-js" lang="en">
-
-@include('includes.head')
-	
-	<body>
-		<!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-
-        @include('includes.header')
-        @include('includes.topArea')
-        @include('includes.welcome')
-        @include('includes.listTopic')
-
-        @include('includes.footer')
-		@include('includes.footerJS')
-
-    </body>
-	
-</html>
+@extends('layouts.article')
+@section('content')
+<h1>My new content for 1st page</h1>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum, fuga rerum! Aspernatur nostrum quis perspiciatis porro rerum debitis velit at! Natus ipsum cum ex nemo, aspernatur laudantium? Esse, in odio.</p>
+<img src="{{ asset('assets/images/blog/b3.jpg') }}" alt="">
+@endsection

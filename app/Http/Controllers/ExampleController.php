@@ -27,6 +27,10 @@ class ExampleController extends Controller
         return view('blog');
     }
 
+    public function blog1(){
+        return view('blog1');
+    }
+
     public function upload(Request $request){
         // $file_extension = $request->image->getClientOriginalExtension();
         // $file_name = time() . '.' . $file_extension;
