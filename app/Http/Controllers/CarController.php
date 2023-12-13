@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Car;
+use App\Models\Category;
 use App\Traits\Common; 
 use Symfony\Component\HttpFoundation\Test\Constraint\ResponseIsRedirected;
 
@@ -27,7 +28,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('addCar');
+        $categories = Category::select('id', 'categoryName')->get();
+        return view('addCar', compact('categories'));
     }
 
     /**

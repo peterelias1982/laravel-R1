@@ -28,6 +28,7 @@ class CarFactory extends Factory
             'published' => 1,
             'image' => fake()->imageUrl(800,600),
             'shortDescription' => fake()->text(),
+            'category_id' => fake()->numberBetween($min = 1, $max = 2),
         ];
     }
 }
