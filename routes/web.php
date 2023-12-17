@@ -5,6 +5,7 @@ use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\PostsController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,3 +96,6 @@ Route::get('carDetails/{id}', [CarController::class, 'show'])->name('carDetails'
 
 Route::get('editCar/{id}', [CarController::class, 'edit']);
 Route::put('updateCar/{id}', [CarController::class, 'update'])->name('updateCar');
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
