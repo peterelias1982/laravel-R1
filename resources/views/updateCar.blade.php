@@ -40,6 +40,17 @@
         <div class="checkbox">
             <label><input type="checkbox" name="published" @checked($car->published)>Published</label>
         </div>
+        <div class="form-group">
+            <label for="category_id">Category:</label>
+            <select name="category_id" id="">
+                <option value="">Select Category</option>
+
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" @selected( $category->id == $car->category_id)>{{ $category->categoryName }}</option>
+                @endforeach
+
+            </select>
+        </div>
         <button type="submit" class="btn btn-default">Update</button>
     </form>
 </div>

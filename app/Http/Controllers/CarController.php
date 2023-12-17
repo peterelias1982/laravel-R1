@@ -81,7 +81,8 @@ class CarController extends Controller
     public function edit(string $id)
     {
         $car = Car::findOrFail($id);
-        return view('updateCar',compact('car'));
+        $categories = Category::select('id', 'categoryName')->get();
+        return view('updateCar',compact('car', 'categories'));
     }
 
     /**
@@ -100,6 +101,7 @@ class CarController extends Controller
             'carTitle'=>'required|string',
             'description'=>'required|string',
             'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+            'category_id' => 'required',
         ], $messages);
        
         $data['published'] = isset($request->published);
