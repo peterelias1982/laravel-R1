@@ -77,6 +77,9 @@ Route::post('receive',[ExampleController::class, 'received'])->name('receive');
 
 Route::get('test1',[ExampleController::class, 'test1']);
 
+Route::get('session',[ExampleController::class, 'mySession']);
+Route::get('getSession',[ExampleController::class, 'getSession']);
+
 Route::get('showUpload',[ExampleController::class, 'showUpload']);
 
 Route::post('upload',[ExampleController::class, 'upload'])->name('upload');
@@ -88,7 +91,7 @@ Route::get('addCar',[CarController::class, 'create']);
 Route::get('trashed',[CarController::class, 'trashed']);
 Route::get('restoreCar/{id}',[CarController::class, 'restore']);
 
-Route::get('cars', [CarController::class, 'index']);
+Route::get('cars', [CarController::class, 'index'])->middleware('verified');
 
 Route::get('deleteCar/{id}', [CarController::class, 'destroy']);
 
