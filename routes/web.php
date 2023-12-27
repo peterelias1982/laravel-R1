@@ -72,8 +72,6 @@ Route::get('login',[ExampleController::class, 'login']);
 Route::get('place',[ExampleController::class, 'place']);
 Route::get('blog',[ExampleController::class, 'blog']);
 Route::get('blog1',[ExampleController::class, 'blog1']);
-Route::get('contact',[ExampleController::class, 'contact']);
-Route::post('receiveContact',[ExampleController::class, 'receiveContact'])->name('receiveContact');
 
 Route::post('receive',[ExampleController::class, 'received'])->name('receive');
 
@@ -104,3 +102,13 @@ Route::put('updateCar/{id}', [CarController::class, 'update'])->name('updateCar'
 Auth::routes(['verify'=>true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+        Route::get('contact',[ExampleController::class, 'contact']);
+        Route::post('receiveContact',[ExampleController::class, 'receiveContact'])->name('receiveContact');
+    });
+    

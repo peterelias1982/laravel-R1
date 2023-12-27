@@ -12,6 +12,10 @@
 </head>
 <body>
 <div class="container">
+    <div>
+        <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
+        <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
+    </div>
     <h2 class="text-center">{{ __('messages.contactForm') }}</h2>
 	<div class="row justify-content-center">
 		<div class="col-12 col-md-8 col-lg-6 pb-5">
