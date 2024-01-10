@@ -74,6 +74,9 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <a href="{{ route('facebookRedirect') }}">Login with facebook</a>
+                        </div>
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\PostsController;
-
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,5 +110,13 @@ Route::group(
     ], function(){
         Route::get('contact',[ExampleController::class, 'contact']);
         Route::post('receiveContact',[ExampleController::class, 'receiveContact'])->name('receiveContact');
+    });
+    
+    Route::get('/auth/redirect', function () {
+        return Socialite::driver('facebook')->redirect();
+    })->name('facebookRedirect');
+
+    Route::get('/auth/callback', function () {
+        $user = Socialite::driver('facebook')->user();
     });
     
